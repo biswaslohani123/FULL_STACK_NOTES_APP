@@ -1,4 +1,6 @@
+import User from "@/app/models/User";
 import { verifyToken } from "@/lib/auth";
+import { connectDB } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -6,6 +8,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
 
     try {
+
+        await connectDB()
 
         // get Authorization header
         const authHeader = req.headers.get('authorization');
@@ -27,11 +31,22 @@ export async function GET(req: NextRequest) {
         // verify token
         const decoded = verifyToken(token);
 
+        const user = await User.findById(decoded.userId).select("-password")
+
+        if (!user) {
+
+            return NextResponse.json({
+                success: false,
+                message: "User not found"
+            })
+            
+        }
+
         // return decoded data
         return NextResponse.json({
 
             success: true,
-            user: decoded
+            user
         }, {status: 200})
 
     } catch (error) {
