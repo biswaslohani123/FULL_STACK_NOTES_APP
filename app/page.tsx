@@ -40,7 +40,7 @@ export default function HomePage() {
         if (response.ok) {
           setUser(data.user);
         } else {
-          router.push("/login");
+          router.push("/");
         }
       } catch (error) {
         console.error(error);
