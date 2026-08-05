@@ -29,7 +29,7 @@ export default function page() {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        router.push("/login");
+        router.push("/");
         return;
       }
 
@@ -92,7 +92,7 @@ export default function page() {
   const handleLogOut = () => {
     toast.success("Logged Out");
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/");
   };
 
   return (
