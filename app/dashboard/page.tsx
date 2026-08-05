@@ -99,7 +99,7 @@ export default function page() {
     <main className="min-h-screen bg-slate-100">
       {/* Navbar Component */}
       <div className="border border-b bg-white p-5">
-        <h1 className="text-2xl font-bold">🗒️ Notes Dashboard</h1>
+        <h1 onClick={() => router.push('/')} className="text-2xl font-bold">🗒️ Notes Dashboard</h1>
       </div>
 
       <div className="mx-auto max-w-7xl p-6">
